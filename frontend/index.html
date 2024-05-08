@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Step Form</title>
+  <style>
+    /* Optional styling for better readability */
+    .step {
+      display: none;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Multi-Step Form</h1>
+
+  <form id="myForm" action="/result" method="post">
+
+    <div class="step">
+      <h2>Question 1</h2>
+      <p>What is your Age?</p>
+      <input type="number"  id="age" name="age" required>
+      <br><br>
+    </div>
+
+    <div class="step">
+      <h2>Question 2</h2>
+      <p>What is your Gender?</p>
+      <label for="male">Male</label>
+      <input type="radio" id="male" name="gender" value="male" required>
+      <label for="female">Female</label>
+      <input type="radio" id="female" name="gender" value="female" required>
+      <br><br>
+    </div>
+
+    <div class="step">
+        <h2>Question 3</h2>
+        <p>on thyroxine?</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="on thyroxine" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="on thyroxine" value="false" required>
+      <br><br>
+      </div>
+
+
+      <div class="step">
+        <h2>Question 4</h2>
+        <p>query on thyroxine</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="query on thyroxine" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="query on thyroxine" value="false" required>
+      <br><br>
+      </div>
+
+
+      <div class="step">
+        <h2>Question 5</h2>
+        <p>on antithyroid medication</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="on antithyroid medication" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="on antithyroid medication" value="false" required>
+      <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 6</h2>
+        <p>sick</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="sick" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="sick" value="false" required>
+      <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 7</h2>
+        <p>pregnant</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="pregnant" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="pregnant" value="false" required>
+      <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 8</h2>
+        <p>thyroid surgery</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="thyroid surgery" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="thyroid surgery" value="false" required>
+      <br><br>
+      </div>
+
+
+      <div class="step">
+        <h2>Question 9</h2>
+        <p>I131 treatment</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="I131 treatment" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="I131 treatment" value="false" required>
+      <br><br>
+      </div>
+
+
+      <div class="step">
+        <h2>Question 10</h2>
+        <p>lithium</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="lithium" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="lithium" value="false" required>
+      <br><br>
+      </div>
+
+
+      <div class="step">
+        <h2>Question 11</h2>
+        <p>goitre</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="goitre" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="goitre" value="false" required>
+      <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 12</h2>
+        <p>tumor</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="tumor" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="tumor" value="false" required>
+      <br><br>
+      </div>
+
+
+
+      <div class="step">
+        <h2>Question 13</h2>
+        <p>hypopituitary</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="hypopituitary" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="hypopituitary" value="false" required>
+      <br><br>
+      </div>
+
+
+      <div class="step">
+        <h2>Question 14</h2>
+        <p>psych</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="psych" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="psych" value="false" required>
+      <br><br>
+      </div>
+
+
+
+      <div class="step">
+        <h2>Question 15</h2>
+        <p>TSH measured</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="TSH measured" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="TSH measured" value="false" required>
+      <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 16</h2>
+        <p>TSH</p>
+        <input type="number"  step="any" id="TSH" name="TSH" required>
+        <br><br>
+      </div>
+
+
+
+      <div class="step">
+        <h2>Question 17</h2>
+        <p>T3 measured</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="T3 measured" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="T3 measured" value="false" required>
+      <br><br>
+      </div>
+
+
+      <div class="step">
+        <h2>Question 18</h2>
+        <p>T3</p>
+        <input type="number" step="any" id="T3" name="T3" required>
+        <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 19</h2>
+        <p>TT4 measured</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="TT4 measured" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="TT4 measured" value="false" required>
+      <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 20</h2>
+        <p>TT4</p>
+        <input type="number" step="any"  id="TT4" name="TT4" required>
+        <br><br>
+      </div>
+
+
+      <div class="step">
+        <h2>Question 21</h2>
+        <p>T4U measured</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="T4U measured" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="T4U measured" value="false" required>
+      <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 22</h2>
+        <p>T4U</p>
+        <input type="number" step="any" id="T4U" name="T4U" required>
+        <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 23</h2>
+        <p>FTI measured</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="FTI measured" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="FTI measured" value="false" required>
+      <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 24</h2>
+        <p>FTI</p>
+        <input type="number" step="any" id="FTI" name="FTI" required>
+        <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 25</h2>
+        <p>TBG measured</p>
+        <label for="true">True</label>
+      <input type="radio" id="true" name="TBG measured" value="true" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="TBG measured" value="false" required>
+      <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 26</h2>
+        <p>TBG</p>
+        <input type="number" step="any" id="TBG" name="TBG" required>
+        <br><br>
+      </div>
+
+      <div class="step">
+        <h2>Question 27</h2>
+        <p>referral source</p>
+        <label for="SVHC">SVHC</label>
+      <input type="radio" id="SVHC" name="referral source" value="SVHC" required>
+      <label for="false">False</label>
+      <input type="radio" id="false" name="referral source" value="false" required>
+      <br><br>
+      </div>
+
+    <div>
+      <button type="button" id="prevBtn" onclick="prevStep()">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextStep()">Next</button>
+      <button type="submit" id="submitBtn" disabled>Submit</button>
+    </div>
+
+  </form>
+
+  <script>
+    var steps = document.querySelectorAll(".step");
+    var currentStep = 0;
+
+    function showStep(step) {
+      steps.forEach(element => element.style.display = "none");
+      steps[step].style.display = "block";
+    }
+
+
+    function nextStep() {
+
+      if (!validateStep(currentStep)) return;
+
+
+      currentStep++;
+
+      if (currentStep === steps.length - 1) {
+        document.getElementById("nextBtn").disabled = true;
+        document.getElementById("submitBtn").disabled = false;
+      }
+      showStep(currentStep);
+    }
+
+
+    function prevStep() {
+
+      if (currentStep === 0) return;
+
+      currentStep--;
+
+      document.getElementById("nextBtn").disabled = false;
+      document.getElementById("submitBtn").disabled = true;
+      showStep(currentStep);
+    }
+
+
+    function validateStep(step) {
+      var input = steps[step].querySelector("input");
+      if (input.value === "") {
+        alert("Please fill out this field!");
+        return false;
+      }
+      return true;
+    }
+
+
+    showStep(currentStep);
+  </script>
+
+</body>
+</html>
