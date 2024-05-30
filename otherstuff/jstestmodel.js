@@ -1,4 +1,4 @@
-const modelData = require('../logistic_regression_model.json'); // Assuming model data is stored in logistic_regression_model.json
+const modelData = require('./logistic_regression_model.json'); // Assuming model data is stored in logistic_regression_model.json
 
 class LogisticRegression {
   constructor(model) {
@@ -30,12 +30,14 @@ const model = new LogisticRegression(modelData);
 
 const inputData = [
     {
-        "Age": 63,
-        "Sex": "F",
-        "on thyroxine": "f",
-        "query on thyroxine": "f",
-        "on antithyroid medication": "f",
+        "age": 88,
+        "sex": "F",
+        "on_thyroxine": "f",
+        "query_on_thyroxine": "f",
+        "on_antithyroid_medication": "f",
         "sick": "f",
+        "query_hyperthyroid":"f",
+        "query_hypothyroid":"f",
         "pregnant": "f",
         "thyroid surgery": "f",
         "I131 treatment": "f",
@@ -44,62 +46,58 @@ const inputData = [
         "tumor": "f",
         "hypopituitary": "f",
         "psych": "f",
-        "TSH measured": "t",
-        "TSH": 0.03,
-        "T3 measured": "t",
-        "T3": 5.5,
-        "TT4 measured": "t",
-        "TT4": 199,
-        "T4U measured": "t",
-        "T4U": 1.05,
-        "FTI measured": "t",
-        "FTI": 190, 
-        "TBG measured": "f",
-        "TBG": 0,
-        "referral source": "other"
+        "TSH": 13,
+        "T3": 0,
+        "TT4": 123,
+        "T4U": 0.99,
+        "FTI": 124, 
+        
       }
 ];
 
 
 
 function preprocessData(data) {
-  const X = [];
-  const y = [];
-  for (const row of data) {
+    const X = [];
+    const y = [];
+    for (const row of data) {
       const features = [];
       for (const key in row) {
-          if (key !== 'Result') {
-              let value = row[key];
-              if (key === 'Sex') {
-                  value = value === 'F' ? 1 : 0;
-              } else if (key === 'referral source') {
-                  switch (value) {
-                      case 'other':
-                          value = 0;
-                          break;
-                      case 'SVI':
-                          value = 1;
-                          break;
-                      case 'SVHC':
-                          value = 2;
-                          break;
-                      default:
-                          value = 3;
-                  }
-              } else if (value === 't') {
-                  value = 1;
-              } else if (value === 'f' || value === '?') {
-                  value = 0;
-              }
-              features.push(parseFloat(value));
+        if (key !== "Class") {
+          let value = row[key];
+          if (key === "sex") {
+            value = (value == "F" || value=="female") ? 1 : 0;
+          }  else if (value == "t" || value == "true") {
+            value = 1;
+          } else if (value == "f"|| value == "false" || value === "?") {
+            value = 0;
           }
+          features.push(parseFloat(value));
+        }else{
+            if(row[key] == "negative"){
+                row[key] = 0
+            }else if(row[key] == "compensated hypothyroid"){
+                row[key] = 1
+            }
+            else if(row[key] == "hyperthyroid"){
+                row[key] = 2
+            }
+            else if(row[key] == "primary hypothyroid"){
+                row[key] = 3
+            }
+            else if(row[key] == "primary hypothyroid"){
+                row[key] = 3
+            }
+        }
       }
       X.push(features);
-      y.push(parseInt(row['Result']));
+      y.push(parseInt(row["Class"]));
+    }
+    return { X, y };
   }
-  return { X, y };
-}
+
+
 
 const { X, y } = preprocessData(inputData);
 const predictions = model.predict(X);
-console.log(X);
+console.log(predictions);

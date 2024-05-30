@@ -40,42 +40,43 @@ function preprocessData(data) {
   for (const row of data) {
     const features = [];
     for (const key in row) {
-      if (key !== "Result") {
+      if (key !== "Class") {
         let value = row[key];
-        if (key === "Sex") {
+        if (key === "sex") {
           value = (value == "F" || value=="female") ? 1 : 0;
-        } else if (key === "referral source") {
-          switch (value) {
-            case "other":
-              value = 0;
-              break;
-            case "SVI":
-              value = 1;
-              break;
-            case "SVHC":
-              value = 2;
-              break;
-            default:
-              value = 3;
-          }
-        } else if (value == "t" || value == "true") {
+        }  else if (value == "t" || value == "true") {
           value = 1;
         } else if (value == "f"|| value == "false" || value === "?") {
           value = 0;
         }
         features.push(parseFloat(value));
+      }else{
+          if(row[key] == "negative"){
+              row[key] = 0
+          }else if(row[key] == "compensated hypothyroid"){
+              row[key] = 1
+          }
+          else if(row[key] == "hyperthyroid"){
+              row[key] = 2
+          }
+          else if(row[key] == "primary hypothyroid"){
+              row[key] = 3
+          }
+          else if(row[key] == "primary hypothyroid"){
+              row[key] = 3
+          }
       }
     }
     X.push(features);
-    y.push(parseInt(row["Result"]));
+    y.push(parseInt(row["Class"]));
   }
   return { X, y };
 }
 
+
 function PredictForServer(inputData) {
   const model = new LogisticRegression(modelData);
   const { X, y } = preprocessData(inputData);
-  console.log(X)
   const predictions = model.predict(X);
   return predictions;
 }
@@ -131,61 +132,49 @@ const server = http.createServer((req, res) => {
     req.on("end", () => {
       const formData = new URLSearchParams(body);
       const age = formData.get("age");
-      const gender = formData.get("gender");
-      const onthyroxine = formData.get("on thyroxine");
-      const queryonthyroxine = formData.get("query on thyroxine");
-      const onantithyroidmedication = formData.get("on antithyroid medication");
+      const sex = formData.get("sex");
+      const onthyroxine = formData.get("on_thyroxine");
+      const queryonthyroxine = formData.get("query_on_thyroxine");
+      const onantithyroidmedication = formData.get("on_antithyroid_medication");
       const sick = formData.get("sick");
       const pregnant = formData.get("pregnant");
-      const thyroidsurgery = formData.get("thyroid surgery");
-      const I131treatment = formData.get("I131 treatment");
+      const thyroidsurgery = formData.get("thyroid_surgery");
+      const I131treatment = formData.get("I131_treatment");
       const lithium = formData.get("lithium");
       const goitre = formData.get("goitre");
       const tumor = formData.get("tumor");
+      const queryhypothyroid = formData.get("query_hypothyroid");
+      const queryhyperthyroid = formData.get("query_hyperthyroid");
       const hypopituitary = formData.get("hypopituitary");
       const psych = formData.get("psych");
-      const TSHmeasured = formData.get("TSH measured");
       const TSH = formData.get("TSH");
-      const T3measured = formData.get("T3 measured");
       const T3 = formData.get("T3");
-      const TT4measured = formData.get("TT4 measured");
       const TT4 = formData.get("TT4");
-      const T4Umeasured = formData.get("T4U measured");
       const T4U = formData.get("T4U");
-      const FTImeasured = formData.get("FTI measured");
       const FTI = formData.get("FTI");
-      const TBGmeasured = formData.get("TBG measured");
-      const TBG = formData.get("TBG");
-      const referralsource = formData.get("referral source");
       const inputData = [
         {
-          "Age": age,
-          'Sex': gender,
-          "on thyroxine": onthyroxine,
-          "query on thyroxine": queryonthyroxine,
-          "on antithyroid medication": onantithyroidmedication,
+          "age": age,
+          'sex': sex,
+          "on_thyroxine": onthyroxine,
+          "query_on_thyroxine": queryonthyroxine,
+          "on_antithyroid_medication": onantithyroidmedication,
           'sick': sick,
           'pregnant': pregnant,
-          "thyroid surgery": thyroidsurgery,
-          "I131 treatment": I131treatment,
+          "thyroid_surgery": thyroidsurgery,
+          "I131_treatment": I131treatment,
           'lithium': lithium,
           'goitre': goitre,
           'tumor': tumor,
           "hypopituitary": hypopituitary,
           "psych": psych,
-          "TSH measured": TSHmeasured,
           "TSH":TSH,
-          "T3 measured": T3measured,
           "T3": T3,
-          "TT4 measured": TT4measured,
           'TT4': TT4,
-          "T4U measured": T4Umeasured,
           'T4U': T4U,
-          "FTI measured": FTImeasured,
           'FTI': FTI,
-          "TBG measured": TBGmeasured,
-          'TBG': TBG,
-          "referral source": referralsource,
+          'query_hypothyroid':queryhypothyroid,
+          'query_hyperthyroid':queryhyperthyroid,
         },
       ];
       const result = PredictForServer(inputData);

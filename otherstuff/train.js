@@ -54,48 +54,51 @@ class LogisticRegression {
     }
 }
 
+
 function preprocessData(data) {
     const X = [];
     const y = [];
     for (const row of data) {
-        const features = [];
-        for (const key in row) {
-            if (key !== 'Result') {
-                let value = row[key];
-                if (key === 'Sex') {
-                    value = value === 'F' ? 1 : 0;
-                } else if (key === 'referral source') {
-                    switch (value) {
-                        case 'other':
-                            value = 0;
-                            break;
-                        case 'SVI':
-                            value = 1;
-                            break;
-                        case 'SVHC':
-                            value = 2;
-                            break;
-                        default:
-                            value = 3;
-                    }
-                } else if (value === 't') {
-                    value = 1;
-                } else if (value === 'f' || value === '?') {
-                    value = 0;
-                }
-                features.push(parseFloat(value));
+      const features = [];
+      for (const key in row) {
+        if (key !== "Class") {
+          let value = row[key];
+          if (key === "sex") {
+            value = (value == "F" || value=="female") ? 1 : 0;
+          }  else if (value == "t" || value == "true") {
+            value = 1;
+          } else if (value == "f"|| value == "false" || value === "?") {
+            value = 0;
+          }
+          features.push(parseFloat(value));
+        }else{
+            if(row[key] == "negative"){
+                row[key] = 0
+            }else if(row[key] == "compensated hypothyroid"){
+                row[key] = 1
+            }
+            else if(row[key] == "hyperthyroid"){
+                row[key] = 2
+            }
+            else if(row[key] == "primary hypothyroid"){
+                row[key] = 3
+            }
+            else if(row[key] == "primary hypothyroid"){
+                row[key] = 3
             }
         }
-        X.push(features);
-        y.push(parseInt(row['Result']));
+      }
+      X.push(features);
+      y.push(parseInt(row["Class"]));
     }
     return { X, y };
-}
+  }
+
 
 const csv = require('csv-parser');
 const fs = require('fs');
 
-const filename = 'allhyper.csv';
+const filename = 'thyroid.csv';
 const data = [];
 
 fs.createReadStream(filename)
@@ -105,6 +108,7 @@ fs.createReadStream(filename)
     })
     .on('end', () => {
         const { X, y } = preprocessData(data);
+        console.log(X, y);
         const numSamples = X.length;
         const numTrainSamples = Math.floor(0.8 * numSamples);
         const XTrain = X.slice(0, numTrainSamples);
