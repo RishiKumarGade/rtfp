@@ -62,9 +62,7 @@ function preprocessData(data) {
           else if(row[key] == "primary hypothyroid"){
               row[key] = 3
           }
-          else if(row[key] == "primary hypothyroid"){
-              row[key] = 3
-          }
+          
       }
     }
     X.push(features);
